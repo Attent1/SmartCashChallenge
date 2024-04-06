@@ -22,9 +22,9 @@ public class FluxoCaixa {
     private Long ID_FLUXO;
 
     @Tipo
-    private Long TIPO;
+    private String TIPO;
 
-    @NotBlank @Positive
+    @Positive
     private BigDecimal VALOR;
 
     @NotBlank @Size(min = 3, max = 250)

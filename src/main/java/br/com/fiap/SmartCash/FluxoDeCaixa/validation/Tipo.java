@@ -14,7 +14,7 @@ import jakarta.validation.Payload;
 @Constraint(validatedBy = TipoValidator.class)
 
 public @interface Tipo {
-    String message() default "{FluxoCaixa.tipo.invalido}";
+    String message() default "{fluxoCaixa.tipo.invalido}";
 
 	Class<?>[] groups() default { };
 

@@ -22,7 +22,7 @@ public class Assinatura {
     @NotBlank @Column(unique =true) @Size(max = 15)
     private String TIPO;
 
-    @NotBlank @Positive
+    @Positive
     private BigDecimal VALOR;
 
 }

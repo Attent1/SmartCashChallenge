@@ -1,9 +1,6 @@
 package br.com.fiap.SmartCash.Usuario;
 
-import org.hibernate.validator.constraints.br.CNPJ;
-import org.hibernate.validator.constraints.br.CPF;
-
-import jakarta.persistence.Column;
+import br.com.fiap.SmartCash.Usuario.validation.CPFOrCNPJ;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -19,17 +16,17 @@ public class Usuario {
     @Id @GeneratedValue(strategy = GenerationType.AUTO)
     private Long ID_USUARIO;
 
-    @NotBlank @Column(unique = true) @Size(min = 3,max = 100)
+    @NotBlank  @Size(min = 1,max = 100)
     private String NOME;
 
-    @NotBlank @CPF @CNPJ
+    @NotBlank @CPFOrCNPJ
     private String DOCUMENTO;
 
     @NotBlank @Size(min=8, max=8)
     private String SENHA;
 
-    private String LOGIN_USUARIO = NOME.charAt(0) + DOCUMENTO.length() == 10 ? DOCUMENTO.substring(7) : DOCUMENTO.substring(9); 
-
+    private String LOGIN_USUARIO; 
+    
     //FK 
     private Long ID_EMPRESA; 
 }
