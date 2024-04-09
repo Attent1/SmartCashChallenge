@@ -71,11 +71,12 @@ public class UsuarioController {
     }
 
     private String geraLoginUsuario(Usuario usuario){
+        String documentoNumerico = usuario.getDOCUMENTO().replaceAll("[^0-9]", "");
         String loginUsuario = usuario.getNOME().substring(0, 1) + 
-        (usuario.getDOCUMENTO().length() == 11 ? 
-        usuario.getDOCUMENTO().substring(7)  
+        (documentoNumerico.length() == 11 ? 
+        documentoNumerico.substring(7)  
         : 
-        usuario.getDOCUMENTO().substring(10));
+        documentoNumerico.substring(10));
         return loginUsuario;
     }
 }
