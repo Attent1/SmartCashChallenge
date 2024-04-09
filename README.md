@@ -76,7 +76,7 @@ Insere uma nova assinatura
 ### Listar todas assinatura
 `GET` /assinatura
 
-Retorna um array com todos as Assinaturas cadastradas
+Retorna um array com todas as Assinaturas cadastradas
 
 **Exemplo de resposta**
 ```js
@@ -197,7 +197,7 @@ Insere uma nova empresa
 ### Listar todas empresa
 `GET` /empresa
 
-Retorna um array com todos as empresas cadastradas
+Retorna um array com todas as empresas cadastradas
 
 **Exemplo de resposta**
 ```js
@@ -279,7 +279,7 @@ Apaga a empresa com o `id` informado.
 
 `POST` /fluxoCaixa
 
-Insere uma nova fluxoCaixa
+Insere um novo fluxo de caixa
 
 |campo|tipo|obrigatório|descrição
 |-----|----|-----------:|---------
@@ -422,7 +422,7 @@ Apaga o fluxo de caixa com o `id` informado.
 
 `POST` /registroAssinatura
 
-Insere uma nova registroAssinatura
+Insere um novo registro da assinatura
 
 |campo|tipo|obrigatório|descrição
 |-----|----|-----------:|---------
@@ -585,7 +585,7 @@ Insere umo novo usuário
 ### Listar todas usuario
 `GET` /usuario
 
-Retorna um array com todos os usuários cadastradas
+Retorna um array com todos os usuários cadastrados
 
 **Exemplo de resposta**
 ```js   
