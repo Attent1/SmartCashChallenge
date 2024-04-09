@@ -1,7 +1,20 @@
 # SmartCash
-descriçao
+    Camila Soares Pedra RM98246
+    Gustavo Bertti RM552243
+    Gustavo Macedo da Silva RM552333
+    Rafael da Silva Camargo RM551127  
+    
+## Atividades realizadas
+    Diagrama UML - Camila
+    README.md - Rafael
+    Controllers, models, repositorys, validation - Todos integrantes
+### Rodar aplicação
+    rodar o comando no terminal .\mvnw spring-boot:run
+ 
+![alt text](Diagramas/image-2.png)
 
 ## Endpoints
+
 - Assinatura 
     - [create](#cadastrar-assinatura)
     - [readAll](#listar-todas-assinatura)
