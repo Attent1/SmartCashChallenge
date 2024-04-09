@@ -27,22 +27,13 @@ import jakarta.validation.Valid;
 @RequestMapping("usuario")
 public class UsuarioController {
 
-    //@Autowired
+    @Autowired
     UsuarioRepository repository;
-    
-    public UsuarioController(UsuarioRepository repository){
-        this.repository = repository;
-    }
-
+        
     @PostMapping
     @ResponseStatus(CREATED)
     public Usuario create(@RequestBody @Valid Usuario usuario){        
-        usuario.setLOGIN_USUARIO(usuario.getNOME().substring(0, 1) + 
-                            (usuario.getDOCUMENTO().length() == 11 ? 
-                            usuario.getDOCUMENTO().substring(7)  
-                            : 
-                            usuario.getDOCUMENTO().substring(10))        
-        );                                         
+        usuario.setLOGIN_USUARIO(geraLoginUsuario(usuario));                                         
         return repository.save(usuario);
     }
     
@@ -63,6 +54,7 @@ public class UsuarioController {
     public Usuario update(@PathVariable Long id, @RequestBody Usuario usuario){
         verificarSeExisteUsuario(id);
         usuario.setID_USUARIO(id);
+        usuario.setLOGIN_USUARIO(geraLoginUsuario(usuario));   
         return repository.save(usuario);
     }
 
@@ -78,4 +70,12 @@ public class UsuarioController {
                   .orElseThrow(() -> new ResponseStatusException(NOT_FOUND, "Usuário não encontrada"));
     }
 
+    private String geraLoginUsuario(Usuario usuario){
+        String loginUsuario = usuario.getNOME().substring(0, 1) + 
+        (usuario.getDOCUMENTO().length() == 11 ? 
+        usuario.getDOCUMENTO().substring(7)  
+        : 
+        usuario.getDOCUMENTO().substring(10));
+        return loginUsuario;
+    }
 }
