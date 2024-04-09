@@ -5,30 +5,35 @@ descriçao
 - Assinatura 
     - [create](#cadastrar-assinatura)
     - [readAll](#listar-todas-assinatura)
+    - [readItem](#listar-assinatura)
     - [update](#editar-assinatura)
     - [delete](#apagar-assinatura)
 
 - Empresa 
     - [create](#cadastrar-empresa)
     - [readAll](#listar-todas-empresa)
+    - [readItem](#listar-empresa)
     - [update](#editar-empresa)
     - [delete](#apagar-empresa)
 
 - Fluxo de Caixa 
     - [create](#cadastrar-fluxoCaixa)
-    - [readAll](#listar-todas-fluxoCaixa)
+    - [readAll](#listar-todos-fluxoCaixa)
+    - [readItem](#listar-fluxoCaixa)
     - [update](#editar-fluxoCaixa)
     - [delete](#apagar-fluxoCaixa)    
 
 - Registro de Assinatura 
     - [create](#cadastrar-registroAssinatura)
-    - [readAll](#listar-todas-registroAssinatura)
+    - [readAll](#listar-todos-registroAssinatura)
+    - [readItem](#listar-registroAssinatura)
     - [update](#editar-registroAssinatura)
     - [delete](#apagar-registroAssinatura)   
 
 - Usuário 
     - [create](#cadastrar-usuario)
-    - [readAll](#listar-todas-usuario)
+    - [readAll](#listar-todos-usuario)
+    - [readItem](#listar-usuario)
     - [update](#editar-usuario)
     - [delete](#apagar-usuario)
 
@@ -92,6 +97,26 @@ Retorna um array com todas as Assinaturas cadastradas
         "valor": 2999.99
     }
 ]
+```
+
+**Códigos de Status**
+
+| código | descrição |
+|--------:|-----------|
+| 200    | dados retornados com sucesso |
+
+### Listar assinatura
+`GET` /assinatura/{id}
+
+Retorna a assinatura do `id` informado.
+
+**Exemplo de resposta**
+```js
+{
+	"id_ASSINATURA": 1,
+	"tipo": "Premium",
+	"valor": 10000.00
+}
 ```
 
 **Códigos de Status**
@@ -223,6 +248,27 @@ Retorna um array com todas as empresas cadastradas
 |--------:|-----------|
 | 200    | dados retornados com sucesso |
 
+### Listar empresa
+`GET` /empresa/{id}
+
+Retorna a empresa do `id` informado.
+
+**Exemplo de resposta**
+```js
+{
+	"id_EMPRESA": 1,
+	"nome": "Apple",
+	"cnpj": "86995983000169",
+	"ramo": "Eletrônico"
+}
+```
+
+**Códigos de Status**
+
+| código | descrição |
+|--------:|-----------|
+| 200    | dados retornados com sucesso |
+
 ### Editar empresa
 
 `PUT` /empresa/{id}
@@ -325,7 +371,7 @@ Insere um novo fluxo de caixa
 | 201    | fluxo de caixa criado com sucesso |
 | 400    | Erro de validação - verifique o corpo da requisição |
 
-### Listar todas fluxoCaixa
+### Listar todos fluxoCaixa
 `GET` /fluxoCaixa
 
 Retorna um array com todos os fluxos de caixa cadastrados
@@ -352,6 +398,30 @@ Retorna um array com todos os fluxos de caixa cadastrados
     "data_INCLUSAO": "2024-04-08"
   }
 ]
+```
+
+**Códigos de Status**
+
+| código | descrição |
+|--------:|-----------|
+| 200    | dados retornados com sucesso |
+
+### Listar fluxoCaixa
+`GET` /fluxoCaixa/{id}
+
+Retorna o fluxo de caixa do `id` informado.
+
+**Exemplo de resposta**
+```js
+{
+	"id_FLUXO": 1,
+	"id_EMPRESA": 1,
+	"id_USUARIO": 2,
+	"tipo": "RECEITA",
+	"valor": 10000.00,
+	"descricao": "Cliente",
+	"data_INCLUSAO": "2024-04-09"
+}
 ```
 
 **Códigos de Status**
@@ -460,7 +530,7 @@ Insere um novo registro da assinatura
 | 201    | Registro de assinatura criado com sucesso |
 | 400    | Erro de validação - verifique o corpo da requisição |
 
-### Listar todas registroAssinatura
+### Listar todos registroAssinatura
 `GET` /registroAssinatura
 
 Retorna um array com todos os Registros de assinatura cadastrados
@@ -476,6 +546,28 @@ Retorna um array com todos os Registros de assinatura cadastrados
 		"data_AQUISICAO": "2024-04-08"
 	}
 ]
+```
+
+**Códigos de Status**
+
+| código | descrição |
+|--------:|-----------|
+| 200    | dados retornados com sucesso |
+
+### Listar registroAssinatura
+`GET` /registroAssinatura/{id}
+
+Retorna o registro da Assinatura do `id` informado.
+
+**Exemplo de resposta**
+```js
+{
+	"id_ASSINATURA": 3,
+	"id_EMPRESA": 2,
+	"data_AQUISICAO": "2024-04-09",
+	"data_VENCIMENTO": "2024-07-09",
+	"id_ASSINATURA_EMPRESA": 1
+}
 ```
 
 **Códigos de Status**
@@ -582,7 +674,7 @@ Insere umo novo usuário
 | 201    | usuário criado com sucesso |
 | 400    | Erro de validação - verifique o corpo da requisição |
 
-### Listar todas usuario
+### Listar todos usuario
 `GET` /usuario
 
 Retorna um array com todos os usuários cadastrados
@@ -608,6 +700,29 @@ Retorna um array com todos os usuários cadastrados
 	}
 ]
 
+```
+
+**Códigos de Status**
+
+| código | descrição |
+|--------:|-----------|
+| 200    | dados retornados com sucesso |
+
+### Listar usuario
+`GET` /usuario/{id}
+
+Retorna o usuário do `id` informado.
+
+**Exemplo de resposta**
+```js
+{
+	"id_EMPRESA": 1,
+	"id_USUARIO": 1,
+	"documento": "87207195000123",
+	"nome": "Aldair",
+	"login_USUARIO": "A0123",
+	"senha": "12345678"
+}
 ```
 
 **Códigos de Status**
