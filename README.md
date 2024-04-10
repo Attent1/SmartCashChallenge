@@ -11,7 +11,11 @@
 ### Rodar aplicação
     rodar o comando no terminal .\mvnw spring-boot:run
  
-![alt text](Diagramas/image-2.png)
+#### Diagrama entidade relacionamento
+![alt text](Documentos/Diagramas/DiagramaEntidadeRelacionamento.png)
+
+#### Diagrama de classes 
+![alt text](Documentos/Diagramas/image-2.png)
 
 ## Endpoints
 
