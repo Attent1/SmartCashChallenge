@@ -9,7 +9,9 @@
     README.md - Rafael
     Controllers, models, repositorys, validation - Todos integrantes
 ### Rodar aplicação
-    rodar o comando no terminal .\mvnw spring-boot:run
+    1 - Clonar o repositório para máquina local
+    2 - Abrir o projeto
+    3 - Rodar o comando no terminal .\mvnw spring-boot:run    
  
 #### Diagrama entidade relacionamento
 ![alt text](Documentos/Diagramas/DiagramaEntidadeRelacionamento.png)
