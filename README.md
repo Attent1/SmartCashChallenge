@@ -3,7 +3,8 @@
     Gustavo Bertti RM552243
     Gustavo Macedo da Silva RM552333
     Rafael da Silva Camargo RM551127  
-    
+## Pitch
+   https://www.youtube.com/watch?v=lk4khY2BL84
 ## Atividades realizadas
     Diagrama UML - Camila
     README.md - Rafael
