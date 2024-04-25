@@ -30,6 +30,4 @@ public class Usuario {
 
     private String LOGIN_USUARIO; 
     
-    //FK 
-    private Long ID_EMPRESA; 
 }
