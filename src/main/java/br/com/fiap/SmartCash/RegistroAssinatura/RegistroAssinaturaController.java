@@ -51,8 +51,8 @@ public class RegistroAssinaturaController {
     @PutMapping("{id}")
     @ResponseStatus(OK)
     public RegistroAssinatura update(@PathVariable Long id, @RequestBody RegistroAssinatura registroAssinatura){
-        verificarSeExisteRegistroAssinatura(id);
-        registroAssinatura.setID_ASSINATURA(id);
+        verificarSeExisteRegistroAssinatura(id);        
+        registroAssinatura.setID_ASSINATURA_EMPRESA(id);
         return repository.save(registroAssinatura);
     }
 
