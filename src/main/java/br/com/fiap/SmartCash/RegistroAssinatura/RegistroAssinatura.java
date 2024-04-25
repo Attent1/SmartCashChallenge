@@ -2,10 +2,13 @@ package br.com.fiap.SmartCash.RegistroAssinatura;
 
 import java.time.LocalDate;
 
+import br.com.fiap.SmartCash.Assinatura.Assinatura;
+import br.com.fiap.SmartCash.Empresa.Empresa;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 import lombok.Data;
 
 @Data
@@ -20,10 +23,12 @@ public class RegistroAssinatura {
 
     private LocalDate DATA_VENCIMENTO = LocalDate.now().plusMonths(3);
 
-    //FK
-    private Long ID_EMPRESA;
+    @ManyToOne
+    private Empresa empresa;
 
-    //FK
-    private Long ID_ASSINATURA;
+    @ManyToOne
+    private Assinatura assinatura;
+
+    private String TOKEN_EMPRESA;
 
 }
