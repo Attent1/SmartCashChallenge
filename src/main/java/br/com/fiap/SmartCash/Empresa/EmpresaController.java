@@ -9,6 +9,9 @@ import java.util.List;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,6 +28,7 @@ import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("empresa")
+@CacheConfig(cacheNames = "empresas")
 public class EmpresaController {
 
     @Autowired
@@ -32,11 +36,13 @@ public class EmpresaController {
     
     @PostMapping
     @ResponseStatus(CREATED)
+    @CacheEvict(allEntries = true)
     public Empresa create(@RequestBody @Valid Empresa empresa){
         return repository.save(empresa);
     }
     
     @GetMapping
+    @Cacheable
     public List<Empresa> readAll(){
         return repository.findAll();
     }
@@ -50,6 +56,7 @@ public class EmpresaController {
 
     @PutMapping("{id}")
     @ResponseStatus(OK)
+    @CacheEvict(allEntries = true)
     public Empresa update(@PathVariable Long id, @RequestBody Empresa empresa){
         verificarSeExisteEmpresa(id);
         empresa.setID_EMPRESA(id);
@@ -58,9 +65,15 @@ public class EmpresaController {
 
     @DeleteMapping("{id}")
     @ResponseStatus(NO_CONTENT)
+    @CacheEvict(allEntries = true)
     public void delete(@PathVariable Long id){        
         verificarSeExisteEmpresa(id);
         repository.deleteById(id);
+    }
+
+    @GetMapping("usuarioAcesso/{idUsuario}")
+    public List<Empresa> getEmpresasUsuarioTemAcesso(@PathVariable Long idUsuario) {
+        return repository.getEmpresasUsuarioTemAcesso(idUsuario);
     }
 
     private Empresa verificarSeExisteEmpresa(Long id) {
