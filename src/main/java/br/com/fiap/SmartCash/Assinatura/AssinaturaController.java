@@ -9,6 +9,9 @@ import java.util.List;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,6 +28,7 @@ import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("assinatura")
+@CacheConfig(cacheNames = "assinaturas")
 public class AssinaturaController {
 
     @Autowired
@@ -32,11 +36,13 @@ public class AssinaturaController {
     
     @PostMapping
     @ResponseStatus(CREATED)
+    @CacheEvict(allEntries = true)
     public Assinatura create(@RequestBody @Valid Assinatura assinatura){
         return repository.save(assinatura);
     }
     
     @GetMapping
+    @Cacheable
     public List<Assinatura> readAll(){
         return repository.findAll();
     }
@@ -50,6 +56,7 @@ public class AssinaturaController {
 
     @PutMapping("{id}")
     @ResponseStatus(OK)
+    @CacheEvict(allEntries = true)
     public Assinatura update(@PathVariable Long id, @RequestBody Assinatura assinatura){
         verificarSeExisteAssinatura(id);
         assinatura.setID_ASSINATURA(id);
@@ -58,6 +65,7 @@ public class AssinaturaController {
 
     @DeleteMapping("{id}")
     @ResponseStatus(NO_CONTENT)
+    @CacheEvict(allEntries = true)
     public void delete(@PathVariable Long id){        
         verificarSeExisteAssinatura(id);
         repository.deleteById(id);

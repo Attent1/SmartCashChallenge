@@ -14,11 +14,16 @@ import jakarta.persistence.ManyToOne;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.Size;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @Entity(name = "TB_FLUXO_CAIXA")
-
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor 
 public class FluxoCaixa {
 
     @Id @GeneratedValue(strategy = GenerationType.AUTO)
@@ -33,6 +38,7 @@ public class FluxoCaixa {
     @NotBlank @Size(min = 3, max = 250)
     private String DESCRICAO;
     
+    @Builder.Default
     private LocalDate DATA_INCLUSAO = LocalDate.now();
 
     @ManyToOne

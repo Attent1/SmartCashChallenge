@@ -9,6 +9,9 @@ import java.util.List;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,6 +28,7 @@ import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("usuario")
+@CacheConfig(cacheNames = "usuarios")
 public class UsuarioController {
 
     @Autowired
@@ -32,12 +36,14 @@ public class UsuarioController {
         
     @PostMapping
     @ResponseStatus(CREATED)
+    @CacheEvict(allEntries = true)
     public Usuario create(@RequestBody @Valid Usuario usuario){        
         usuario.setLOGIN_USUARIO(geraLoginUsuario(usuario));                                         
         return repository.save(usuario);
     }
     
     @GetMapping
+    @Cacheable
     public List<Usuario> readAll(){
         return repository.findAll();
     }
@@ -51,6 +57,7 @@ public class UsuarioController {
 
     @PutMapping("{id}")
     @ResponseStatus(OK)
+    @CacheEvict(allEntries = true)
     public Usuario update(@PathVariable Long id, @RequestBody Usuario usuario){
         verificarSeExisteUsuario(id);
         usuario.setID_USUARIO(id);
@@ -60,6 +67,7 @@ public class UsuarioController {
 
     @DeleteMapping("{id}")
     @ResponseStatus(NO_CONTENT)
+    @CacheEvict(allEntries = true)
     public void delete(@PathVariable Long id){        
         verificarSeExisteUsuario(id);
         repository.deleteById(id);
