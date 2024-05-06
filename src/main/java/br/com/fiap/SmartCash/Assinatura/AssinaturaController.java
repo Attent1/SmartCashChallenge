@@ -24,11 +24,13 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("assinatura")
 @CacheConfig(cacheNames = "assinaturas")
+@Tag(name = "Assinaturas", description = "Endpoint relacionado com Assinaturas")
 public class AssinaturaController {
 
     @Autowired

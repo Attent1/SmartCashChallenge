@@ -21,10 +21,12 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("registroAssinatura")
+@Tag(name = "Registro de Assinatura", description = "Endpoint relacionado com Registro de Assinatura")
 public class RegistroAssinaturaController {
 
     @Autowired

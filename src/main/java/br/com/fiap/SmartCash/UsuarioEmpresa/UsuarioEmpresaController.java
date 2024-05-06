@@ -21,10 +21,12 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("usuarioEmpresa")
+@Tag(name = "Relacionamento entre usuário e empresas", description = "Endpoint relacionado a relação de usuários com empresas")
 public class UsuarioEmpresaController {
 
     @Autowired
