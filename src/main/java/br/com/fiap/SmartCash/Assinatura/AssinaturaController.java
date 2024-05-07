@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 
@@ -39,17 +40,21 @@ public class AssinaturaController {
     @PostMapping
     @ResponseStatus(CREATED)
     @CacheEvict(allEntries = true)
+    @Operation(summary = "Cadastra uma nova assinatura no sistema.")
     public Assinatura create(@RequestBody @Valid Assinatura assinatura){
         return repository.save(assinatura);
     }
     
     @GetMapping
     @Cacheable
+    @Operation(summary = "Lista todas as assinaturas cadastradas no sistema.", 
+    description = "Endpoint que retorna um array de objetos do tipo assinaturas com todas as assinaturas do sistema")
     public List<Assinatura> readAll(){
         return repository.findAll();
     }
 
     @GetMapping("{id}")
+    @Operation(summary = "Lista uma assinatura por ID.")
     public ResponseEntity<Assinatura> readItem(@PathVariable Long id){
         return repository.findById(id)
                          .map(ResponseEntity::ok) 
@@ -59,6 +64,7 @@ public class AssinaturaController {
     @PutMapping("{id}")
     @ResponseStatus(OK)
     @CacheEvict(allEntries = true)
+    @Operation(summary = "Atualiza uma assinatura ja existente no sistema.")
     public Assinatura update(@PathVariable Long id, @RequestBody Assinatura assinatura){
         verificarSeExisteAssinatura(id);
         assinatura.setID_ASSINATURA(id);
@@ -68,6 +74,7 @@ public class AssinaturaController {
     @DeleteMapping("{id}")
     @ResponseStatus(NO_CONTENT)
     @CacheEvict(allEntries = true)
+    @Operation(summary = "Deleta uma assinatura ja existente no sistema.")
     public void delete(@PathVariable Long id){        
         verificarSeExisteAssinatura(id);
         repository.deleteById(id);
