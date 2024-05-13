@@ -32,5 +32,5 @@
     Model RegistroAssinatura = entidade TB_ASSINATURA_EMPRESA
 ![alt text](Documentos/Diagramas/image-2.png)
 
-## Endpoints
-    [Documentação da API](http://localhost:8080/docs)
+## Documentação da API com endpoints
+    https://localhost:8080/docs
