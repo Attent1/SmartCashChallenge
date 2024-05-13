@@ -1,6 +1,11 @@
 package br.com.fiap.SmartCash.Assinatura;
 
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
+
 import java.math.BigDecimal;
+
+import org.springframework.hateoas.EntityModel;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -31,4 +36,12 @@ public class Assinatura {
     @Positive
     private BigDecimal VALOR;
 
+    public EntityModel<Assinatura> toEntityModel() {
+        return EntityModel.of(
+                this,
+                linkTo(methodOn(AssinaturaController.class).readItem(ID_ASSINATURA)).withSelfRel(),
+                linkTo(methodOn(AssinaturaController.class).delete(ID_ASSINATURA)).withRel("delete"),
+                linkTo(methodOn(AssinaturaController.class).readAll(null)).withRel("contents")
+            );
+    }    
 }

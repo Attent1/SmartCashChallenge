@@ -5,9 +5,14 @@ import static org.springframework.http.HttpStatus.NOT_FOUND;
 import static org.springframework.http.HttpStatus.OK;
 import static org.springframework.http.HttpStatus.NO_CONTENT;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort.Direction;
+import org.springframework.data.web.PageableDefault;
+import org.springframework.data.web.PagedResourcesAssembler;
+import org.springframework.hateoas.EntityModel;
+import org.springframework.hateoas.PagedModel;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -32,6 +37,8 @@ public class FluxoCaixaController {
     @Autowired
     FluxoCaixaRepository repository;
 
+    @Autowired
+    PagedResourcesAssembler<FluxoCaixa> pageAssembler;
     @PostMapping
     @ResponseStatus(CREATED)
     @Operation(summary = "Cria um novo Fluxo de Caixa.", description = "Cadastra um novo fluxo de caixa no sistema.")
@@ -40,9 +47,13 @@ public class FluxoCaixaController {
     }
 
     @GetMapping
-    @Operation(summary = "Lista todos os Fluxos de Caixa.", description = "Retorna uma lista de todos os fluxos de caixa cadastrados.")
-    public List<FluxoCaixa> readAll() {
-        return repository.findAll();
+    @Operation(summary = "Lista todos os Fluxos de Caixa.", 
+               description = "Retorna uma lista de todos os fluxos de caixa cadastrados e seus respectivos links para outros recursos." +
+               "Trocar string por VALOR no 'sort' na hora de testar pela doc da web"
+               )
+    public PagedModel<EntityModel<FluxoCaixa>> readAll(@PageableDefault(size = 5, sort = "VALOR", direction = Direction.ASC) Pageable pageable) {
+        Page<FluxoCaixa> page = repository.findAll(pageable);
+        return pageAssembler.toModel(page, FluxoCaixa::toEntityModel);
     }
 
     @GetMapping("{id}")

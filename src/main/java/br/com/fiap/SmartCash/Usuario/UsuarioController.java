@@ -98,7 +98,7 @@ public class UsuarioController {
     @GetMapping("/login")
     public Boolean login(@RequestParam String loginUsuario, @RequestParam String senhaUsuario) {
         Usuario usuario = repository.LoginUsuario(loginUsuario);
-
+        
         if (usuario != null) {
             if (usuario.getSENHA().equals(senhaUsuario)) {
                 return true;

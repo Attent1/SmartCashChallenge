@@ -1,8 +1,14 @@
 package br.com.fiap.SmartCash.FluxoDeCaixa;
 
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
+
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
+import org.springframework.hateoas.EntityModel;
+
+import br.com.fiap.SmartCash.Assinatura.AssinaturaController;
 import br.com.fiap.SmartCash.Empresa.Empresa;
 import br.com.fiap.SmartCash.FluxoDeCaixa.validation.Tipo;
 import br.com.fiap.SmartCash.Usuario.Usuario;
@@ -47,5 +53,13 @@ public class FluxoCaixa {
     @ManyToOne
     private Usuario usuario;
 
+    public EntityModel<FluxoCaixa> toEntityModel() {
+        return EntityModel.of(
+                this,
+                linkTo(methodOn(AssinaturaController.class).readItem(ID_FLUXO)).withSelfRel(),
+                linkTo(methodOn(AssinaturaController.class).delete(ID_FLUXO)).withRel("delete"),
+                linkTo(methodOn(AssinaturaController.class).readAll(null)).withRel("contents")
+            );
+    }    
     
 }

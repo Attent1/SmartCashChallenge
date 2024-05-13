@@ -54,8 +54,10 @@ public class DataBaseSeeder implements CommandLineRunner {
         assinaturaRepository.saveAll(
                 List.of(
                         Assinatura.builder().ID_ASSINATURA(1L).TIPO("BASIC").VALOR(new BigDecimal("999.99")).build(),
-                        Assinatura.builder().ID_ASSINATURA(2L).TIPO("MEDIUM").VALOR(new BigDecimal("1999.99"))
-                                .build()));
+                        Assinatura.builder().ID_ASSINATURA(2L).TIPO("MEDIUM").VALOR(new BigDecimal("1999.99")).build(),
+                        Assinatura.builder().ID_ASSINATURA(3L).TIPO("PREMIUM").VALOR(new BigDecimal("2999.99")).build()
+                        )
+                );
 
         usuarioRepository.saveAll(
                 List.of(
