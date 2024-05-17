@@ -15,22 +15,11 @@
     3 - Rodar o comando no terminal .\mvnw spring-boot:run    
  
 #### Diagrama entidade relacionamento
-![alt text](Documentos/Diagramas/DiagramaEntidadeRelacionamento.png)
-
-    TB_USUARIO
-     FK TB_EMPRESA_ID_EMPRESA - representa a empresa do usuário
-
-    TB_FLUXO_CAIXA
-        FK TB_EMPRESA_ID_EMPRESA - representa a empresa do fluxo de caixa
-        FK TB_USUARIO_ID_USUARIO - representa o usuário que registrou o fluxo de caixa
-
-    TB_ASSINATURA_EMPRESA - Tabela de relação entre Assinatura e empresa (registros dessa tabela gravam uma empresa adquirindo uma assinatura)
-        FK TB_EMPRESA_ID_EMPRESA - representa a empresa que adquiriu a assinatura
-        FK TB_ASSINATURA_ID_ASSINATURA - representa qual assinatura foi adquirida 
+![alt text](Documentos/Diagramas/DER.png)
 
 #### Diagrama de classes 
     Model RegistroAssinatura = entidade TB_ASSINATURA_EMPRESA
-![alt text](Documentos/Diagramas/image-2.png)
+![alt text](Documentos/Diagramas/DiagramaUML.png)
 
 ## Documentação da API com endpoints
     https://localhost:8080/docs
