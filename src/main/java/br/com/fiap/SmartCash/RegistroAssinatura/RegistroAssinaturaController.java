@@ -7,6 +7,7 @@ import static org.springframework.http.HttpStatus.NO_CONTENT;
 
 import java.util.List;
 
+import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -36,6 +37,9 @@ public class RegistroAssinaturaController {
     @ResponseStatus(CREATED)
     @Operation(summary = "Cria um novo registro de assinatura.", description = "Cria um novo registro de assinatura no sistema.")  // Adicionado
     public RegistroAssinatura create(@RequestBody @Valid RegistroAssinatura registroAssinatura) {
+        String caracteres = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*_";                
+        String StringAleatoria = RandomStringUtils.random(10, caracteres);
+        registroAssinatura.setTOKEN_EMPRESA(StringAleatoria);
         return repository.save(registroAssinatura);
     }
 

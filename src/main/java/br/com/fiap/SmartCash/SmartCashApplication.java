@@ -19,7 +19,7 @@ public class SmartCashApplication {
 
 	@RequestMapping
 	@ResponseBody
-	public String home(){	 
+	public String home(){					
 		return "SmartCash";		
 	}
 	

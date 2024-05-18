@@ -73,14 +73,14 @@ public class DataBaseSeeder implements CommandLineRunner {
                                 .DATA_VENCIMENTO(LocalDate.now().plusMonths(3))
                                 .empresa(empresaRepository.findById(1L).orElse(null))
                                 .assinatura(assinaturaRepository.findById(1L).orElse(null))
-                                .TOKEN_EMPRESA("#zR2Vmf2s3@FLvh7VV@dHK")
+                                .TOKEN_EMPRESA("R2Vmf2s3@F")
                                 .build(),
                         RegistroAssinatura.builder()
                                 .DATA_AQUISICAO(LocalDate.now())
                                 .DATA_VENCIMENTO(LocalDate.now().plusMonths(3))
                                 .empresa(empresaRepository.findById(1L).orElse(null))
                                 .assinatura(assinaturaRepository.findById(2L).orElse(null))
-                                .TOKEN_EMPRESA("tY2$XaeqfRq8dMpR5QEt")
+                                .TOKEN_EMPRESA("xQtY2$Xaeq")
                                 .build()));
 
         fluxoCaixaRepository.saveAll(
