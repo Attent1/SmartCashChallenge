@@ -5,10 +5,9 @@
     Rafael da Silva Camargo RM551127  
 ## Pitch
    https://www.youtube.com/watch?v=lk4khY2BL84
-## Atividades realizadas
-    Diagrama UML - Camila
-    README.md - Rafael
-    Controllers, models, repositorys, validation - Todos integrantes
+## Tarefas realizadas
+![alt text](Documentos/CronogramDesenvolvimento.png)    
+
 ### Rodar aplicação
     1 - Clonar o repositório para máquina local
     2 - Abrir o projeto
