@@ -8,7 +8,6 @@ import java.time.LocalDate;
 
 import org.springframework.hateoas.EntityModel;
 
-import br.com.fiap.SmartCash.Assinatura.AssinaturaController;
 import br.com.fiap.SmartCash.Empresa.Empresa;
 import br.com.fiap.SmartCash.FluxoDeCaixa.validation.Tipo;
 import br.com.fiap.SmartCash.Usuario.Usuario;
@@ -56,9 +55,9 @@ public class FluxoCaixa {
     public EntityModel<FluxoCaixa> toEntityModel() {
         return EntityModel.of(
                 this,
-                linkTo(methodOn(AssinaturaController.class).readItem(ID_FLUXO)).withSelfRel(),
-                linkTo(methodOn(AssinaturaController.class).delete(ID_FLUXO)).withRel("delete"),
-                linkTo(methodOn(AssinaturaController.class).readAll(null)).withRel("contents")
+                linkTo(methodOn(FluxoCaixaController.class).readItem(ID_FLUXO)).withSelfRel(),
+                linkTo(methodOn(FluxoCaixaController.class).delete(ID_FLUXO)).withRel("delete"),
+                linkTo(methodOn(FluxoCaixaController.class).readAll(null)).withRel("contents")
             );
     }    
     

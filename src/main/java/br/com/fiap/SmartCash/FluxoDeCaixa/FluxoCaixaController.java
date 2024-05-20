@@ -76,9 +76,10 @@ public class FluxoCaixaController {
     @DeleteMapping("{id}")
     @ResponseStatus(NO_CONTENT)
     @Operation(summary = "Deleta um Fluxo de Caixa.", description = "Remove um fluxo de caixa pelo seu ID.")
-    public void delete(@PathVariable Long id) {
+    public ResponseEntity<Object> delete(@PathVariable Long id) {
         verificarSeExisteFluxoCaixa(id);
         repository.deleteById(id);
+        return ResponseEntity.noContent().build();
     }
 
     private FluxoCaixa verificarSeExisteFluxoCaixa(Long id) {
