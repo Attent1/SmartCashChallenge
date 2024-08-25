@@ -7,6 +7,8 @@ import static org.springframework.http.HttpStatus.NO_CONTENT;
 
 import java.util.List;
 
+import br.com.fiap.SmartCash.Usuario.dto.UsuarioRequest;
+import br.com.fiap.SmartCash.Usuario.dto.UsuarioResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CacheEvict;
@@ -24,6 +26,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -39,18 +42,32 @@ public class UsuarioController {
     @Autowired
     UsuarioRepository repository;
 
+    UsuarioService usuarioService;
+
+    public UsuarioController(UsuarioService usuarioService) {
+        this.usuarioService = usuarioService;
+    }
+
     @PostMapping
     @ResponseStatus(CREATED)
     @CacheEvict(allEntries = true)
     @Operation(summary = "Cria um novo usuário.", description = "Cria um novo usuário no sistema.")
-    public Usuario create(@RequestBody @Valid Usuario usuario) {
-        usuario.setLOGIN_USUARIO(geraLoginUsuario(usuario));
-        return repository.save(usuario);
+    public ResponseEntity<UsuarioResponse> create(@RequestBody @Valid UsuarioRequest usuarioRequest, UriComponentsBuilder uriBuilder) {
+        Usuario usuario = usuarioService.create(usuarioRequest.toModel());
+
+        var uri = uriBuilder
+                .path("/usuario/{id}")
+                .buildAndExpand(usuario.getID_USUARIO())
+                .toUri();
+
+        return ResponseEntity
+               .created(uri)
+               .body(UsuarioResponse.from(usuario));
     }
 
     @GetMapping
     @Cacheable
-    @Operation(summary = "Lista todos os usuários.", description = "Retorna uma lista de todos os usuários no sistema.") // Adicionado
+    @Operation(summary = "Lista todos os usuários.", description = "Retorna uma lista de todos os usuários no sistema.")
     public List<Usuario> readAll() {
         return repository.findAll();
     }
@@ -82,29 +99,26 @@ public class UsuarioController {
         repository.deleteById(id);
     }
 
-    private Usuario verificarSeExisteUsuario(Long id) {
-        return repository.findById(id)
+    private void verificarSeExisteUsuario(Long id) {
+        repository.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(NOT_FOUND, "Usuário não encontrado"));
     }
 
     private String geraLoginUsuario(Usuario usuario) {
         String documentoNumerico = usuario.getDOCUMENTO().replaceAll("[^0-9]", "");
-        String loginUsuario = usuario.getNOME().substring(0, 1) +
+        return usuario.getNOME().substring(0, 1) +
                 (documentoNumerico.length() == 11 ? documentoNumerico.substring(7)
                         : documentoNumerico.substring(10));
-        return loginUsuario;
     }
 
-    @GetMapping("/login")
-    public Boolean login(@RequestParam String loginUsuario, @RequestParam String senhaUsuario) {
-        Usuario usuario = repository.LoginUsuario(loginUsuario);
-        
-        if (usuario != null) {
-            if (usuario.getSENHA().equals(senhaUsuario)) {
-                return true;
-            }
-        }
-        return false;
-    }
+//    @GetMapping("/login")
+//    public Boolean login(@RequestParam String loginUsuario, @RequestParam String senhaUsuario) {
+//        Usuario usuario = repository.LoginUsuario(loginUsuario);
+//
+//        if (usuario != null) {
+//            return usuario.getSENHA().equals(senhaUsuario);
+//        }
+//        return false;
+//    }
 
 }

@@ -44,73 +44,73 @@ public class DataBaseSeeder implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        empresaRepository.saveAll(
-                List.of(
-                        Empresa.builder().ID_EMPRESA(1L).NOME("Kabum").CNPJ("64.423.918/0001-26").RAMO("Eletrônico")
-                                .build(),
-                        Empresa.builder().ID_EMPRESA(2L).NOME("Ogilvy").CNPJ("67.107.516/0001-00").RAMO("Publicidade")
-                                .build()));
-
-        assinaturaRepository.saveAll(
-                List.of(
-                        Assinatura.builder().ID_ASSINATURA(1L).TIPO("BASIC").VALOR(new BigDecimal("999.99")).build(),
-                        Assinatura.builder().ID_ASSINATURA(2L).TIPO("MEDIUM").VALOR(new BigDecimal("1999.99")).build(),
-                        Assinatura.builder().ID_ASSINATURA(3L).TIPO("PREMIUM").VALOR(new BigDecimal("2999.99")).build()
-                        )
-                );
-
-        usuarioRepository.saveAll(
-                List.of(
-                        Usuario.builder().ID_USUARIO(1L).NOME("Rafael").DOCUMENTO("123.456.789-00").SENHA("senha123")
-                                .LOGIN_USUARIO("R8900").build(),
-                        Usuario.builder().ID_USUARIO(2L).NOME("Gustavo").DOCUMENTO("987.654.321-00").SENHA("senha456")
-                                .LOGIN_USUARIO("G2100").build()));
-
-        registroAssinaturaRepository.saveAll(
-                List.of(
-                        RegistroAssinatura.builder()
-                                .DATA_AQUISICAO(LocalDate.now())
-                                .DATA_VENCIMENTO(LocalDate.now().plusMonths(3))
-                                .empresa(empresaRepository.findById(1L).orElse(null))
-                                .assinatura(assinaturaRepository.findById(1L).orElse(null))
-                                .TOKEN_EMPRESA("R2Vmf2s3@F")
-                                .build(),
-                        RegistroAssinatura.builder()
-                                .DATA_AQUISICAO(LocalDate.now())
-                                .DATA_VENCIMENTO(LocalDate.now().plusMonths(3))
-                                .empresa(empresaRepository.findById(1L).orElse(null))
-                                .assinatura(assinaturaRepository.findById(2L).orElse(null))
-                                .TOKEN_EMPRESA("xQtY2$Xaeq")
-                                .build()));
-
-        fluxoCaixaRepository.saveAll(
-                List.of(
-                        FluxoCaixa.builder()
-                                .TIPO("RECEITA")
-                                .VALOR(new BigDecimal("100.00"))
-                                .DESCRICAO("Recebimento de pagamento")
-                                .DATA_INCLUSAO(LocalDate.now())
-                                .empresa(empresaRepository.findById(1L).orElse(null))
-                                .usuario(usuarioRepository.findById(1L).orElse(null))
-                                .build(),
-                        FluxoCaixa.builder()
-                                .TIPO("DESPESA")
-                                .VALOR(new BigDecimal("50.00"))
-                                .DESCRICAO("Pagamento de fornecedor")
-                                .DATA_INCLUSAO(LocalDate.now())
-                                .empresa(empresaRepository.findById(2L).orElse(null))
-                                .usuario(usuarioRepository.findById(2L).orElse(null))
-                                .build()));
-
-        usuarioEmpresaRepository.saveAll(
-                List.of(
-                        UsuarioEmpresa.builder()
-                                .empresa(empresaRepository.findById(1L).orElse(null))
-                                .usuario(usuarioRepository.findById(1L).orElse(null))
-                                .build(),
-                        UsuarioEmpresa.builder()
-                                .empresa(empresaRepository.findById(2L).orElse(null))
-                                .usuario(usuarioRepository.findById(2L).orElse(null))
-                                .build()));
+//        empresaRepository.saveAll(
+//                List.of(
+//                        Empresa.builder().ID_EMPRESA(1L).NOME("Kabum").CNPJ("64423918000126").RAMO("Eletrônico")
+//                                .build(),
+//                        Empresa.builder().ID_EMPRESA(2L).NOME("Ogilvy").CNPJ("67107516000100").RAMO("Publicidade")
+//                                .build()));
+//
+//        assinaturaRepository.saveAll(
+//                List.of(
+//                        Assinatura.builder().ID_ASSINATURA(1L).TIPO("BASIC").VALOR(new BigDecimal("999.99")).build(),
+//                        Assinatura.builder().ID_ASSINATURA(2L).TIPO("MEDIUM").VALOR(new BigDecimal("1999.99")).build(),
+//                        Assinatura.builder().ID_ASSINATURA(3L).TIPO("PREMIUM").VALOR(new BigDecimal("2999.99")).build()
+//                        )
+//                );
+//
+//        usuarioRepository.saveAll(
+//                List.of(
+//                        Usuario.builder().ID_USUARIO(1L).NOME("Rafael").DOCUMENTO("123.456.789-00").SENHA("senha123")
+//                                .LOGIN_USUARIO("R8900").build(),
+//                        Usuario.builder().ID_USUARIO(2L).NOME("Gustavo").DOCUMENTO("987.654.321-00").SENHA("senha456")
+//                                .LOGIN_USUARIO("G2100").build()));
+//
+//        registroAssinaturaRepository.saveAll(
+//                List.of(
+//                        RegistroAssinatura.builder()
+//                                .DATA_AQUISICAO(LocalDate.now())
+//                                .DATA_VENCIMENTO(LocalDate.now().plusMonths(3))
+//                                .empresa(empresaRepository.findById(1L).orElse(null))
+//                                .assinatura(assinaturaRepository.findById(1L).orElse(null))
+//                                .TOKEN_EMPRESA("R2Vmf2s3@F")
+//                                .build(),
+//                        RegistroAssinatura.builder()
+//                                .DATA_AQUISICAO(LocalDate.now())
+//                                .DATA_VENCIMENTO(LocalDate.now().plusMonths(3))
+//                                .empresa(empresaRepository.findById(1L).orElse(null))
+//                                .assinatura(assinaturaRepository.findById(2L).orElse(null))
+//                                .TOKEN_EMPRESA("xQtY2$Xaeq")
+//                                .build()));
+//
+//        fluxoCaixaRepository.saveAll(
+//                List.of(
+//                        FluxoCaixa.builder()
+//                                .TIPO("RECEITA")
+//                                .VALOR(new BigDecimal("100.00"))
+//                                .DESCRICAO("Recebimento de pagamento")
+//                                .DATA_INCLUSAO(LocalDate.now())
+//                                .empresa(empresaRepository.findById(1L).orElse(null))
+//                                .usuario(usuarioRepository.findById(1L).orElse(null))
+//                                .build(),
+//                        FluxoCaixa.builder()
+//                                .TIPO("DESPESA")
+//                                .VALOR(new BigDecimal("50.00"))
+//                                .DESCRICAO("Pagamento de fornecedor")
+//                                .DATA_INCLUSAO(LocalDate.now())
+//                                .empresa(empresaRepository.findById(2L).orElse(null))
+//                                .usuario(usuarioRepository.findById(2L).orElse(null))
+//                                .build()));
+//
+//        usuarioEmpresaRepository.saveAll(
+//                List.of(
+//                        UsuarioEmpresa.builder()
+//                                .empresa(empresaRepository.findById(1L).orElse(null))
+//                                .usuario(usuarioRepository.findById(1L).orElse(null))
+//                                .build(),
+//                        UsuarioEmpresa.builder()
+//                                .empresa(empresaRepository.findById(2L).orElse(null))
+//                                .usuario(usuarioRepository.findById(2L).orElse(null))
+//                                .build()));
     }
 }

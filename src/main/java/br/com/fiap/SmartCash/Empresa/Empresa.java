@@ -1,12 +1,8 @@
 package br.com.fiap.SmartCash.Empresa;
 
+import jakarta.persistence.*;
 import org.hibernate.validator.constraints.br.CNPJ;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
@@ -21,7 +17,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor 
 public class Empresa {
 
-    @Id @GeneratedValue(strategy = GenerationType.AUTO)
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "EMPRESA_SEQ")
+    @SequenceGenerator(name = "EMPRESA_SEQ", sequenceName = "TB_EMPRESA_SEQ", allocationSize = 1)
     private Long ID_EMPRESA;
 
     @NotBlank @Column(unique = true) @Size(min = 3,max = 100)

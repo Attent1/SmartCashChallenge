@@ -84,8 +84,8 @@ public class EmpresaController {
         return repository.getEmpresasUsuarioTemAcesso(idUsuario);
     }
 
-    private Empresa verificarSeExisteEmpresa(Long id) {
-        return repository.findById(id)
+    private void verificarSeExisteEmpresa(Long id) {
+        repository.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(NOT_FOUND, "Empresa não encontrada"));
     }
 
