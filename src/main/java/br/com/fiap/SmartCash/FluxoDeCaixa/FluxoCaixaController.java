@@ -58,8 +58,8 @@ public class FluxoCaixaController {
 
     @GetMapping("/dataInclusao")
     @Operation(summary = "Lista todos os Fluxos de Caixa pela data de inclusão informada.")
-    public PagedModel<EntityModel<FluxoCaixa>> getFluxoPorDataInclusao(@RequestParam String dataInclusao, @PageableDefault(size = 100) Pageable pageable) {
-        Page<FluxoCaixa> page = repository.findByDataInclusao(dataInclusao, pageable);
+    public PagedModel<EntityModel<FluxoCaixa>> getFluxoPorDataInclusao(@RequestParam String dataInclusao, @RequestParam Long idEmpresa, @PageableDefault(size = 100) Pageable pageable) {
+        Page<FluxoCaixa> page = repository.findByDataInclusao(dataInclusao, idEmpresa, pageable);
         return pageAssembler.toModel(page, FluxoCaixa::toEntityModel);
     }
 
