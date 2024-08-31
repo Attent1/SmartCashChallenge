@@ -14,15 +14,7 @@ import org.springframework.data.web.PagedResourcesAssembler;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.PagedModel;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import io.swagger.v3.oas.annotations.Operation;
@@ -62,6 +54,13 @@ public class FluxoCaixaController {
         return repository.findById(id)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
+    }
+
+    @GetMapping("/dataInclusao")
+    @Operation(summary = "Lista todos os Fluxos de Caixa pela data de inclusão informada.")
+    public PagedModel<EntityModel<FluxoCaixa>> getFluxoPorDataInclusao(@RequestParam String dataInclusao, @PageableDefault(size = 100) Pageable pageable) {
+        Page<FluxoCaixa> page = repository.findByDataInclusao(dataInclusao, pageable);
+        return pageAssembler.toModel(page, FluxoCaixa::toEntityModel);
     }
 
     @PutMapping("{id}")

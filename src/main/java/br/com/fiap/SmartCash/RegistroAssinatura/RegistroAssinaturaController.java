@@ -76,12 +76,22 @@ public class RegistroAssinaturaController {
     }
 
     @GetMapping("/token")
-    public void reenviarToken(@RequestParam String email) {
-        var token = repository.getTokenByEmailEmpresa(email);
-        if (token == null) {
-            throw new RuntimeException("Email inválido");
+    public void enviarToken(@RequestParam String email, @RequestParam String tipoEnvio ) {
+        if (tipoEnvio.equals("I")){
+            var token = repository.getTokenByEmailEmpresa(email);
+            if (token == null) {
+                throw new RuntimeException("Email inválido");
+            }
+            emailService.sendEmailText(email, "Token de acesso", "Aqui está seu token: " + token);
         }
-        emailService.sendEmailText(email, "Reenvio de token", token);
+        if (tipoEnvio.equals("R")){
+            var token = repository.getTokenByEmailEmpresa(email);
+            if (token == null) {
+                throw new RuntimeException("Email inválido");
+            }
+            emailService.sendEmailText(email, "Reenvio de token", token);
+        }
+
     }
 
 }
