@@ -1,6 +1,7 @@
 package br.com.fiap.SmartCash.Empresa;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
 import org.hibernate.validator.constraints.br.CNPJ;
 
 import jakarta.validation.constraints.NotBlank;
@@ -27,6 +28,9 @@ public class Empresa {
 
     @CNPJ
     private String CNPJ;
+
+    @Email
+    private String EMAIL;
 
     @NotBlank @Size(min = 3,max = 50)
     private String RAMO;

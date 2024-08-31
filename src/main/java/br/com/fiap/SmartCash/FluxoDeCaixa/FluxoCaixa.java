@@ -6,16 +6,12 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
+import jakarta.persistence.*;
 import org.springframework.hateoas.EntityModel;
 
 import br.com.fiap.SmartCash.Empresa.Empresa;
 import br.com.fiap.SmartCash.FluxoDeCaixa.validation.Tipo;
 import br.com.fiap.SmartCash.Usuario.Usuario;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.Size;
@@ -47,9 +43,11 @@ public class FluxoCaixa {
     private LocalDate DATA_INCLUSAO = LocalDate.now();
 
     @ManyToOne
+    @JoinColumn(name = "ID_EMPRESA")
     private Empresa empresa;
 
     @ManyToOne
+    @JoinColumn(name = "ID_USUARIO")
     private Usuario usuario;
 
     public EntityModel<FluxoCaixa> toEntityModel() {

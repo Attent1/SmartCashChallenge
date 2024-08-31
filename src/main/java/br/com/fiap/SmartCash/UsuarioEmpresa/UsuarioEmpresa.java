@@ -2,11 +2,7 @@ package br.com.fiap.SmartCash.UsuarioEmpresa;
 
 import br.com.fiap.SmartCash.Empresa.Empresa;
 import br.com.fiap.SmartCash.Usuario.Usuario;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -23,8 +19,10 @@ public class UsuarioEmpresa {
     private Long ID_USUARIO_EMPRESA;
 
     @ManyToOne
+    @JoinColumn(name = "ID_EMPRESA")
     private Empresa empresa;
 
     @ManyToOne
+    @JoinColumn(name = "ID_USUARIO")
     private Usuario usuario;
 }

@@ -4,11 +4,7 @@ import java.time.LocalDate;
 
 import br.com.fiap.SmartCash.Assinatura.Assinatura;
 import br.com.fiap.SmartCash.Empresa.Empresa;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -33,9 +29,11 @@ public class RegistroAssinatura {
     private LocalDate DATA_VENCIMENTO = LocalDate.now().plusMonths(3);
 
     @ManyToOne
+    @JoinColumn(name = "ID_EMPRESA")
     private Empresa empresa;
 
     @ManyToOne
+    @JoinColumn(name = "ID_ASSINATURA")
     private Assinatura assinatura;
 
     @Size(max=10)
