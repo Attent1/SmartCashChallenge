@@ -1,6 +1,7 @@
 package br.com.fiap.SmartCash.Usuario;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
@@ -30,9 +31,10 @@ public class Usuario {
             message = "{usuario.cpf-cpnj.invalido}") 
     private String DOCUMENTO;
 
-    @NotBlank @Size(min=8, max=80)
-    private String SENHA;
+    @Email
+    private String EMAIL;
 
-    private String LOGIN_USUARIO; 
+    @NotBlank @Size(min=8, max=100)
+    private String SENHA;
     
 }

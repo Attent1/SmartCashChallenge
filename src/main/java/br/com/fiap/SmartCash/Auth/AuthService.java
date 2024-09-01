@@ -18,15 +18,14 @@ public class AuthService {
         this.passwordEncoder = passwordEncoder;
     }
 
-
     public Token login(Credenciais credenciais) {
-        var user = usuarioRepository.LoginUsuario(credenciais.loginUsuario())
+        var user = usuarioRepository.findByEMAIL(credenciais.email())
                 .orElseThrow(() -> new RuntimeException("Acesso negado"));
 
         if (!passwordEncoder.matches(credenciais.senha(), user.getSENHA()))
             throw new RuntimeException("Acesso negado");
 
-        return tokenService.gerarToken(credenciais.loginUsuario());
+        return tokenService.gerarToken(credenciais.email());
     }
 
 }

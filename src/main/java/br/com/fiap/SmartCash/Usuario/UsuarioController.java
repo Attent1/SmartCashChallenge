@@ -87,7 +87,6 @@ public class UsuarioController {
     public Usuario update(@PathVariable Long id, @RequestBody Usuario usuario) {
         verificarSeExisteUsuario(id);
         usuario.setID_USUARIO(id);
-        usuario.setLOGIN_USUARIO(geraLoginUsuario(usuario));
         return repository.save(usuario);
     }
 
@@ -103,22 +102,5 @@ public class UsuarioController {
         repository.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(NOT_FOUND, "Usuário não encontrado"));
     }
-
-    private String geraLoginUsuario(Usuario usuario) {
-        String documentoNumerico = usuario.getDOCUMENTO().replaceAll("[^0-9]", "");
-        return usuario.getNOME().substring(0, 1) +
-                (documentoNumerico.length() == 11 ? documentoNumerico.substring(7)
-                        : documentoNumerico.substring(10));
-    }
-
-//    @GetMapping("/login")
-//    public Boolean login(@RequestParam String loginUsuario, @RequestParam String senhaUsuario) {
-//        Usuario usuario = repository.LoginUsuario(loginUsuario);
-//
-//        if (usuario != null) {
-//            return usuario.getSENHA().equals(senhaUsuario);
-//        }
-//        return false;
-//    }
 
 }
