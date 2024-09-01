@@ -45,6 +45,8 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: java-app
+          run-id: ${{ github.event.workflow_run.id }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: List directory contents
         run: dir # Lista o conteúdo do diretório para verificar se o artefato foi baixado corretamente
