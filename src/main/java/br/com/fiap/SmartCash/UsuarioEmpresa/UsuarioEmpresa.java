@@ -15,7 +15,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor 
 
 public class UsuarioEmpresa {
-    @Id @GeneratedValue(strategy = GenerationType.AUTO)
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "USUARIO_EMPRESA_SEQ")
+    @SequenceGenerator(name = "USUARIO_EMPRESA_SEQ", sequenceName = "TB_USUARIO_EMPRESA_SEQ", allocationSize = 1)
     private Long ID_USUARIO_EMPRESA;
 
     @ManyToOne
