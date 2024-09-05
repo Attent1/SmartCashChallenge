@@ -27,7 +27,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor 
 public class FluxoCaixa {
 
-    @Id @GeneratedValue(strategy = GenerationType.AUTO)
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "FLUXO_CAIXA_SEQ")
+    @SequenceGenerator(name = "FLUXO_CAIXA_SEQ", sequenceName = "TB_FLUXO_CAIXA_SEQ", allocationSize = 1)
     private Long ID_FLUXO;
 
     @Tipo

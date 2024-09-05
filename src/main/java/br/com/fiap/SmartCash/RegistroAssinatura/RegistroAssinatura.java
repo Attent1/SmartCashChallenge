@@ -19,7 +19,9 @@ import lombok.NoArgsConstructor;
 
 public class RegistroAssinatura {
     
-    @Id @GeneratedValue(strategy = GenerationType.AUTO)
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ASSINATURA_EMPRESA_SEQ")
+    @SequenceGenerator(name = "ASSINATURA_EMPRESA_SEQ", sequenceName = "TB_ASSINATURA_EMPRESA_SEQ", allocationSize = 1)
     private Long ID_ASSINATURA_EMPRESA;
         
     @Builder.Default

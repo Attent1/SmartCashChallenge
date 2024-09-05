@@ -5,13 +5,9 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 import java.math.BigDecimal;
 
+import jakarta.persistence.*;
 import org.springframework.hateoas.EntityModel;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.Size;
@@ -27,7 +23,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor 
 
 public class Assinatura {
-    @Id @GeneratedValue(strategy = GenerationType.AUTO)
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ASSINATURA_SEQ")
+    @SequenceGenerator(name = "ASSINATURA_SEQ", sequenceName = "TB_ASSINATURA_SEQ", allocationSize = 1)
     private Long ID_ASSINATURA;
 
     @NotBlank @Column(unique =true) @Size(max = 15)
