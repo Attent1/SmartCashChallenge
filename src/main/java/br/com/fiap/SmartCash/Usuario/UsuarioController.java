@@ -6,8 +6,8 @@ import static org.springframework.http.HttpStatus.OK;
 import static org.springframework.http.HttpStatus.NO_CONTENT;
 
 import java.util.List;
-import java.util.Optional;
 
+import br.com.fiap.SmartCash.Auth.Credenciais;
 import br.com.fiap.SmartCash.Usuario.dto.UsuarioRequest;
 import br.com.fiap.SmartCash.Usuario.dto.UsuarioResponse;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -96,6 +96,13 @@ public class UsuarioController {
         verificarSeExisteUsuario(id);
         usuario.setID_USUARIO(id);
         return repository.save(usuario);
+    }
+
+    @PutMapping("novaSenha")
+    public UsuarioResponse atualizarSenha(@RequestBody Credenciais credenciais){
+        var usuario = repository.findByEMAIL(credenciais.email()).orElseThrow(() -> new UsernameNotFoundException("Usuário não encontrado"));
+        usuarioService.update(usuario);
+        return UsuarioResponse.from(usuario);
     }
 
     @DeleteMapping("{id}")
