@@ -70,9 +70,9 @@ public class RegistroAssinaturaController {
         repository.deleteById(id);
     }
 
-    private RegistroAssinatura verificarSeExisteRegistroAssinatura(Long id) {
-        return repository.findById(id)
-                  .orElseThrow(() -> new ResponseStatusException(NOT_FOUND, "Registro de assinatura não encontrado"));
+    private void verificarSeExisteRegistroAssinatura(Long id) {
+        repository.findById(id)
+                .orElseThrow(() -> new ResponseStatusException(NOT_FOUND, "Registro de assinatura não encontrado"));
     }
 
     @GetMapping("/token")
@@ -92,6 +92,11 @@ public class RegistroAssinaturaController {
             emailService.sendEmailText(email, "Reenvio de token", token);
         }
 
+    }
+
+    @GetMapping("tokenByAssinatura")
+    public RegistroAssinatura getRegistroAssinaturaByToken(@RequestParam String token) {
+        return repository.getRegistroAssinaturaByToken(token);
     }
 
 }

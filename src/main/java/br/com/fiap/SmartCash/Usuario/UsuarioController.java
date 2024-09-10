@@ -6,6 +6,7 @@ import static org.springframework.http.HttpStatus.OK;
 import static org.springframework.http.HttpStatus.NO_CONTENT;
 
 import java.util.List;
+import java.util.Optional;
 
 import br.com.fiap.SmartCash.Usuario.dto.UsuarioRequest;
 import br.com.fiap.SmartCash.Usuario.dto.UsuarioResponse;
@@ -14,6 +15,7 @@ import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -78,6 +80,12 @@ public class UsuarioController {
         return repository.findById(id)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
+    }
+
+    @GetMapping("email")
+    public UsuarioResponse getUsuarioByEmail(@RequestParam String email) {
+        var usuario = repository.findByEMAIL(email).orElseThrow(() -> new UsernameNotFoundException("Usuário não encontrado"));
+        return UsuarioResponse.from(usuario);
     }
 
     @PutMapping("{id}")

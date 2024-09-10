@@ -14,4 +14,9 @@ public interface RegistroAssinaturaRepository extends JpaRepository<RegistroAssi
             nativeQuery = true)
     String getTokenByEmailEmpresa(String email);
 
+    @Query(value = "SELECT A.* FROM TB_ASSINATURA_EMPRESA A " +
+                   "WHERE A.TOKEN_EMPRESA = ?1",
+            nativeQuery = true)
+    RegistroAssinatura getRegistroAssinaturaByToken(String token);
+
 }
