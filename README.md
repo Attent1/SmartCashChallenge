@@ -15,6 +15,7 @@
     selecionar o tipo Bearer Token e colocar o token gerado pela resposta de um login com sucesso
     Se não for feito os passos acima nenhum outro endpoint irá funcionar pois a aplicação entenderá que o 
     usuário não está autenticado.
+    Na criação das empresas é necessario utilizar CNPJ válidos, use um gerador para isso, sem pontuação
     
 ## Exportar endpoints para aplicativo de API
     O arquivo com os endpoints está na pasta Documentos com o nome endpointParaTeste.
