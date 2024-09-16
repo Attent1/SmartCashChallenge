@@ -18,9 +18,15 @@ public class SecurityConfig {
         http.csrf(AbstractHttpConfigurer::disable);
         http.authorizeHttpRequests(auth ->
                 auth
+                        .requestMatchers(HttpMethod.GET, "/empresa").permitAll()
+                        .requestMatchers(HttpMethod.PUT,"/usuario/novaSenha").permitAll()
                         .requestMatchers(HttpMethod.POST,"/login").permitAll()
-                        .requestMatchers(HttpMethod.POST, "/usuario").permitAll()
-                        .requestMatchers(HttpMethod.GET).permitAll()
+                        .requestMatchers(HttpMethod.POST,"/usuario").permitAll()
+                        .requestMatchers(HttpMethod.GET,"/registroAssinatura/token").permitAll()
+                        .requestMatchers(HttpMethod.POST,"/empresa").permitAll()
+                        .requestMatchers(HttpMethod.POST,"/registroAssinatura").permitAll()
+                        .requestMatchers(HttpMethod.GET,"/assinatura").permitAll()
+                        .requestMatchers(HttpMethod.GET,"/assinatura/{id}").permitAll()
                         .requestMatchers("/swagger-ui/**").permitAll()
                         .requestMatchers("/swagger-resources/**").permitAll()
                         .requestMatchers("/v3/api-docs/**").permitAll()
