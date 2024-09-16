@@ -1,5 +1,7 @@
 package br.com.fiap.SmartCash.Usuario;
 
+import br.com.fiap.SmartCash.Auth.Credenciais;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -21,8 +23,8 @@ public class UsuarioService {
         return usuarioRepository.save(usuario);
     }
 
-    public Usuario update(Usuario usuario) {
-        usuario.setSENHA(passwordEncoder.encode(usuario.getSENHA()));
+    public Usuario update(Usuario usuario, Credenciais credenciais) {
+        usuario.setSENHA(passwordEncoder.encode(credenciais.senha()));
         return usuarioRepository.save(usuario);
     }
 

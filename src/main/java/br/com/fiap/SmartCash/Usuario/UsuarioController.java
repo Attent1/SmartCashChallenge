@@ -101,7 +101,7 @@ public class UsuarioController {
     @PutMapping("novaSenha")
     public UsuarioResponse atualizarSenha(@RequestBody Credenciais credenciais){
         var usuario = repository.findByEMAIL(credenciais.email()).orElseThrow(() -> new UsernameNotFoundException("Usuário não encontrado"));
-        usuarioService.update(usuario);
+        usuarioService.update(usuario, credenciais);
         return UsuarioResponse.from(usuario);
     }
 
