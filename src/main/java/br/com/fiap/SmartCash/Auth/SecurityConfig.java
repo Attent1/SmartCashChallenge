@@ -32,7 +32,7 @@ public class SecurityConfig {
                         .requestMatchers("/v3/api-docs/**").permitAll()
                         .requestMatchers("/webjars/**").permitAll() 
                         .requestMatchers("/docs").permitAll()
-                        .anyRequest().authenticated()
+                        .anyRequest().permitAll()
         );
         http.addFilterBefore(authorizationFilter, UsernamePasswordAuthenticationFilter.class);
         return http.build();
