@@ -11,7 +11,9 @@
 ### Rodar aplicação
     1 - Clonar o repositório para máquina local
     2 - Abrir o projeto
-    3 - Rodar o comando no terminal .\mvnw spring-boot:run    
+    3 - Abrir docker desktop
+    4 - Digitar docker compose up --build    
+    5 - Rodar a aplicação 
  
 #### Diagrama entidade relacionamento
 ![alt text](Documentos/Diagramas/DER.png)
