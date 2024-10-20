@@ -8,9 +8,9 @@ import static org.springframework.http.HttpStatus.NO_CONTENT;
 import java.util.List;
 
 import br.com.fiap.SmartCash.Auth.Credenciais;
+import br.com.fiap.SmartCash.Email.dto.EmailDto;
 import br.com.fiap.SmartCash.Usuario.dto.UsuarioRequest;
 import br.com.fiap.SmartCash.Usuario.dto.UsuarioResponse;
-import br.com.fiap.SmartCash.Email.Email;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheConfig;
@@ -61,13 +61,11 @@ public class UsuarioController {
     @Operation(summary = "Cria um novo usuário.", description = "Cria um novo usuário no sistema.")
     public ResponseEntity<UsuarioResponse> create(@RequestBody @Valid UsuarioRequest usuarioRequest, UriComponentsBuilder uriBuilder) {
         Usuario usuario = usuarioService.create(usuarioRequest.toModel());
-
-        Email email = new Email(usuario.getEMAIL(),
-                        "Criação de conta",
-                       "Conta criada com sucesso, Bem vindo ao SmartCash " + usuario.getNOME()
+        EmailDto emailDto = new EmailDto(usuario.getEMAIL(),
+                       usuario.getNOME()
         );
 
-        rabbitTemplate.convertAndSend("email-queue", email);
+        rabbitTemplate.convertAndSend("email-queue", emailDto);
 
         var uri = uriBuilder
                 .path("/usuario/{id}")
