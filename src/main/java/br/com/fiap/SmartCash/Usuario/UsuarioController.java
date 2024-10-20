@@ -10,6 +10,8 @@ import java.util.List;
 import br.com.fiap.SmartCash.Auth.Credenciais;
 import br.com.fiap.SmartCash.Usuario.dto.UsuarioRequest;
 import br.com.fiap.SmartCash.Usuario.dto.UsuarioResponse;
+import br.com.fiap.SmartCash.Email.Email;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CacheEvict;
@@ -46,8 +48,11 @@ public class UsuarioController {
 
     UsuarioService usuarioService;
 
-    public UsuarioController(UsuarioService usuarioService) {
+    private final RabbitTemplate rabbitTemplate;
+
+    public UsuarioController(UsuarioService usuarioService, RabbitTemplate rabbitTemplate) {
         this.usuarioService = usuarioService;
+        this.rabbitTemplate = rabbitTemplate;
     }
 
     @PostMapping
@@ -56,6 +61,13 @@ public class UsuarioController {
     @Operation(summary = "Cria um novo usuário.", description = "Cria um novo usuário no sistema.")
     public ResponseEntity<UsuarioResponse> create(@RequestBody @Valid UsuarioRequest usuarioRequest, UriComponentsBuilder uriBuilder) {
         Usuario usuario = usuarioService.create(usuarioRequest.toModel());
+
+        Email email = new Email(usuario.getEMAIL(),
+                        "Criação de conta",
+                       "Conta criada com sucesso, Bem vindo ao SmartCash " + usuario.getNOME()
+        );
+
+        rabbitTemplate.convertAndSend("email-queue", email);
 
         var uri = uriBuilder
                 .path("/usuario/{id}")

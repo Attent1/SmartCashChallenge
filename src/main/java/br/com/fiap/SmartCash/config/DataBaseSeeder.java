@@ -1,24 +1,14 @@
 package br.com.fiap.SmartCash.config;
 
-import java.math.BigDecimal;
-import java.time.LocalDate;
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
 
-import br.com.fiap.SmartCash.Assinatura.Assinatura;
 import br.com.fiap.SmartCash.Assinatura.AssinaturaRepository;
-import br.com.fiap.SmartCash.Empresa.Empresa;
 import br.com.fiap.SmartCash.Empresa.EmpresaRepository;
-import br.com.fiap.SmartCash.FluxoDeCaixa.FluxoCaixa;
 import br.com.fiap.SmartCash.FluxoDeCaixa.FluxoCaixaRepository;
-import br.com.fiap.SmartCash.RegistroAssinatura.RegistroAssinatura;
 import br.com.fiap.SmartCash.RegistroAssinatura.RegistroAssinaturaRepository;
-import br.com.fiap.SmartCash.Usuario.Usuario;
 import br.com.fiap.SmartCash.Usuario.UsuarioRepository;
-import br.com.fiap.SmartCash.UsuarioEmpresa.UsuarioEmpresa;
 import br.com.fiap.SmartCash.UsuarioEmpresa.UsuarioEmpresaRepository;
 
 @Configuration
